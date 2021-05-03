@@ -1,16 +1,19 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"strings"
 
 	"github.com/PuerkitoBio/goquery"
 )
 
 type Player = struct {
-	name     string
-	hometown string
+	Name     string `json:"name"`
+	Hometown string `json:"hometown"`
 }
 
 func loadDocument(url string) *goquery.Document {
@@ -37,10 +40,10 @@ func players(doc *goquery.Document) []Player {
 		href, _ := s.Attr("href")
 		detailDoc := loadDocument("https://www.yakult-swallows.co.jp/" + href)
 
-		name := s.Find(".item-title").Text()
+		name := strings.ReplaceAll(s.Find(".item-title").Text(), "　", " ")
 		hometown := detailDoc.Find("#top_ > div > div.sect > div > article > div.box-profile > div > div.md-6-5 > div > table > tbody > tr:nth-child(3) > td:nth-child(4)").Text()
 
-		players = append(players, Player{name: name, hometown: hometown})
+		players = append(players, Player{Name: name, Hometown: hometown})
 	})
 
 	return players
@@ -58,7 +61,15 @@ func main() {
 	outfielder := players(loadDocument(outfielderUrl))
 
 	players := append(append(append(pitchers, catchers...), ielders...), outfielder...)
-	for _, players := range players {
-		fmt.Printf("名前: %s, 出身地: %s\n", players.name, players.hometown)
+
+	file, err := os.Create(`SwallowsPlayers.json`)
+	if err != nil {
+		log.Fatal(err)
 	}
+	defer file.Close()
+
+	bytes, _ := json.MarshalIndent(players, "", "  ")
+	file.Write(([]byte)(string(bytes)))
+
+	fmt.Println("SUCCESS")
 }
