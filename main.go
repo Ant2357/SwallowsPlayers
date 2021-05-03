@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"regexp"
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
@@ -41,7 +42,10 @@ func players(doc *goquery.Document) []Player {
 		detailDoc := loadDocument("https://www.yakult-swallows.co.jp/" + href)
 
 		name := strings.ReplaceAll(s.Find(".item-title").Text(), "　", " ")
-		hometown := detailDoc.Find("#top_ > div > div.sect > div > article > div.box-profile > div > div.md-6-5 > div > table > tbody > tr:nth-child(3) > td:nth-child(4)").Text()
+
+		re := regexp.MustCompile(`県$|府$|都$`)
+		hometownPath := "#top_ > div > div.sect > div > article > div.box-profile > div > div.md-6-5 > div > table > tbody > tr:nth-child(3) > td:nth-child(4)"
+		hometown := re.ReplaceAllString(detailDoc.Find(hometownPath).Text(), "")
 
 		players = append(players, Player{Name: name, Hometown: hometown})
 	})
