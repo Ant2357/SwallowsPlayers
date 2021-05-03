@@ -8,8 +8,13 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func loadDocument(pitcherUrl string) *goquery.Document {
-	res, err := http.Get(pitcherUrl)
+type Player = struct {
+	name     string
+	hometown string
+}
+
+func loadDocument(url string) *goquery.Document {
+	res, err := http.Get(url)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -26,13 +31,19 @@ func loadDocument(pitcherUrl string) *goquery.Document {
 	return doc
 }
 
-func names(doc *goquery.Document) []string {
-	names := make([]string, 0)
-	doc.Find(".item-title").Each(func(i int, s *goquery.Selection) {
-		names = append(names, s.Text())
+func players(doc *goquery.Document) []Player {
+	players := make([]Player, 0)
+	doc.Find(".item-avatar").Each(func(i int, s *goquery.Selection) {
+		href, _ := s.Attr("href")
+		detailDoc := loadDocument("https://www.yakult-swallows.co.jp/" + href)
+
+		name := s.Find(".item-title").Text()
+		hometown := detailDoc.Find("#top_ > div > div.sect > div > article > div.box-profile > div > div.md-6-5 > div > table > tbody > tr:nth-child(3) > td:nth-child(4)").Text()
+
+		players = append(players, Player{name: name, hometown: hometown})
 	})
 
-	return names
+	return players
 }
 
 func main() {
@@ -41,13 +52,13 @@ func main() {
 	infielderUrl := "https://www.yakult-swallows.co.jp/players/category/infielder"
 	outfielderUrl := "https://www.yakult-swallows.co.jp/players/category/outfielder"
 
-	pitchers := names(loadDocument(pitcherUrl))
-	catchers := names(loadDocument(catcherUrl))
-	ielders := names(loadDocument(infielderUrl))
-	outfielder := names(loadDocument(outfielderUrl))
+	pitchers := players(loadDocument(pitcherUrl))
+	catchers := players(loadDocument(catcherUrl))
+	ielders := players(loadDocument(infielderUrl))
+	outfielder := players(loadDocument(outfielderUrl))
 
 	players := append(append(append(pitchers, catchers...), ielders...), outfielder...)
-	for _, name := range players {
-		fmt.Println(name)
+	for _, players := range players {
+		fmt.Printf("名前: %s, 出身地: %s\n", players.name, players.hometown)
 	}
 }
