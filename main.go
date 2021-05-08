@@ -54,17 +54,19 @@ func players(doc *goquery.Document) []Player {
 }
 
 func main() {
+	managerUrl := "https://www.yakult-swallows.co.jp/players/category/manager"
 	pitcherUrl := "https://www.yakult-swallows.co.jp/players/category/pitcher"
 	catcherUrl := "https://www.yakult-swallows.co.jp/players/category/catcher"
 	infielderUrl := "https://www.yakult-swallows.co.jp/players/category/infielder"
 	outfielderUrl := "https://www.yakult-swallows.co.jp/players/category/outfielder"
 
+	managers := players(loadDocument(managerUrl))
 	pitchers := players(loadDocument(pitcherUrl))
 	catchers := players(loadDocument(catcherUrl))
-	ielders := players(loadDocument(infielderUrl))
-	outfielder := players(loadDocument(outfielderUrl))
+	infielders := players(loadDocument(infielderUrl))
+	outfielders := players(loadDocument(outfielderUrl))
 
-	players := append(append(append(pitchers, catchers...), ielders...), outfielder...)
+	players := append(append(append(append(managers, pitchers...), catchers...), infielders...), outfielders...)
 
 	file, err := os.Create(`SwallowsPlayers.json`)
 	if err != nil {
