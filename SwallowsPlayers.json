@@ -1,11 +1,11 @@
 [
   {
-    "name": "高津 臣吾",
+    "name": "髙津 臣吾",
     "hometown": "広島"
   },
   {
-    "name": "宮出 隆自",
-    "hometown": "愛媛"
+    "name": "松元 ユウイチ",
+    "hometown": "ブラジル"
   },
   {
     "name": "伊藤 智仁",
@@ -20,20 +20,32 @@
     "hometown": "高知"
   },
   {
-    "name": "松元 ユウイチ",
-    "hometown": "ブラジル"
+    "name": "大松 尚逸",
+    "hometown": "石川"
   },
   {
     "name": "森岡 良介",
     "hometown": "大阪"
   },
   {
+    "name": "佐藤 真一",
+    "hometown": "北海道"
+  },
+  {
     "name": "衣川 篤史",
     "hometown": "兵庫"
   },
   {
+    "name": "嶋 基宏",
+    "hometown": "岐阜"
+  },
+  {
     "name": "池山 隆寛",
     "hometown": "兵庫"
+  },
+  {
+    "name": "城石 憲之",
+    "hometown": "埼玉"
   },
   {
     "name": "尾花 髙夫",
@@ -48,8 +60,8 @@
     "hometown": "熊本"
   },
   {
-    "name": "大松 尚逸",
-    "hometown": "石川"
+    "name": "宮出 隆自",
+    "hometown": "愛媛"
   },
   {
     "name": "畠山 和洋",
@@ -58,10 +70,6 @@
   {
     "name": "緒方 耕一",
     "hometown": "熊本"
-  },
-  {
-    "name": "佐藤 真一",
-    "hometown": "北海道"
   },
   {
     "name": "福川 将和",
@@ -120,10 +128,6 @@
     "hometown": "栃木"
   },
   {
-    "name": "坂本 光士郎",
-    "hometown": "広島"
-  },
-  {
     "name": "吉田 大喜",
     "hometown": "大阪"
   },
@@ -156,8 +160,8 @@
     "hometown": "東京"
   },
   {
-    "name": "スアレス",
-    "hometown": "ベネズエラ"
+    "name": "山本 大貴",
+    "hometown": "北海道"
   },
   {
     "name": "大西 広樹",
@@ -170,6 +174,10 @@
   {
     "name": "金久保 優斗",
     "hometown": "千葉"
+  },
+  {
+    "name": "スアレス",
+    "hometown": "アメリカ"
   },
   {
     "name": "近藤 弘樹",
@@ -194,6 +202,10 @@
   {
     "name": "竹山 日向",
     "hometown": "愛知"
+  },
+  {
+    "name": "コール",
+    "hometown": "アメリカ"
   },
   {
     "name": "大下 佑馬",
@@ -326,6 +338,10 @@
   {
     "name": "並木 秀尊",
     "hometown": "埼玉"
+  },
+  {
+    "name": "キブレハン",
+    "hometown": "アメリカ"
   },
   {
     "name": "丸山 和郁",
